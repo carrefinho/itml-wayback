@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+        <script type="text/javascript">
+            const socket = io();
+
+            socket.on('connect', () => {
+                console.log('connected');
+            })
+
+            function setup() {
+                createCanvas(800, 480);
+                background('#686868');
+
+                socket.on('image', imageRaw => {
+                    loadImage(imageRaw, img => {
+                        image(img, 300, 50, 415, 415);
+                    })
+                })
+            }
+        </script>
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+            }
+            canvas {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+
+    </body>
+</html>
